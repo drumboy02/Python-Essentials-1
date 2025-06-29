@@ -85,12 +85,25 @@ def display_board(board):
     print(dboard_2)
   print(dboard_1)
     
-'''
+
 def enter_move(board):
-    # The function accepts the board's current status, asks the user about their move, 
-    # checks the input, and updates the board according to the user's decision.
-
-
+  # The function accepts the board's current status, asks the user about their move, 
+  # checks the input, and updates the board according to the user's decision.
+  pmove = None
+  try:
+    pmove = int(input('Enter a move: '))
+    if pmove < 1 or pmove > 9:
+      print('Enter an number between 1 and 9')
+      enter_move(board)
+  except ValueError:
+    print('Enter an number between 1 and 9')
+    enter_move(board)
+    
+  for i in range(3):
+    if pmove in board[i]:
+      index = board[i].index(pmove)
+      board[i][index] = pmark
+'''
 def make_list_of_free_fields(board):
     # The function browses the board and builds a list of all the free squares; 
     # the list consists of tuples, while each tuple is a pair of row and column numbers.
@@ -104,4 +117,9 @@ def victory_for(board, sign):
 def draw_move(board):
     # The function draws the computer's move and updates the board.
 '''
+enter_move(board)
+display_board(board)
+enter_move(board)
+display_board(board)
+enter_move(board)
 display_board(board)
