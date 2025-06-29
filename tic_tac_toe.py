@@ -58,7 +58,39 @@ from random import randrange
 for i in range(10):
   print(randrange(8))
 '''
+from random import randrange
 
+cmark = 'X'
+pmark = 'O'
+nmark = '   '
+
+board = [
+          [1, 2, 3],
+          [4, 5, 6],
+          [7, 8, 9]
+        ]
+
+dboard_1 = '+-------+-------+-------+'
+dboard_2 = '|       |       |       |'
+dboard_n = '|   '
+
+print(board)
+
+print(dboard_1)
+print(dboard_2)
+print(dboard_n + str(board[0][0]) + nmark + dboard_n + str(board[0][1]) + nmark + dboard_n + str(board[0][2]) + nmark + dboard_n)
+print(dboard_2)
+print(dboard_1)
+print(dboard_2)
+print(dboard_n + str(board[1][0]) + nmark + dboard_n + str(board[1][1]) + nmark + dboard_n + str(board[1][2]) + nmark + dboard_n)
+print(dboard_2)
+print(dboard_1)
+print(dboard_2)
+print(dboard_n + str(board[2][0]) + nmark + dboard_n + str(board[2][1]) + nmark + dboard_n + str(board[2][2]) + nmark + dboard_n)
+print(dboard_2)
+print(dboard_1)
+
+'''
 def display_board(board):
     # The function accepts one parameter containing the board's current status
     # and prints it out to the console.
@@ -81,3 +113,4 @@ def victory_for(board, sign):
 
 def draw_move(board):
     # The function draws the computer's move and updates the board.
+'''
