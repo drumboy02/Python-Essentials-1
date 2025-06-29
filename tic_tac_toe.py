@@ -98,17 +98,35 @@ def enter_move(board):
   except ValueError:
     print('Enter an number between 1 and 9')
     enter_move(board)
-    
+  '''  
   for i in range(3):
     if pmove in board[i]:
+      print(pmove, board[i])
       index = board[i].index(pmove)
       board[i][index] = pmark
-'''
+  '''
+  flist = make_list_of_free_fields(board)
+  for c in flist:
+    print(c, board[c[0]][c[1]])
+    if board[c[0]][c[1]] == pmove:
+      board[c[0]][c[1]] = pmark
+
 def make_list_of_free_fields(board):
-    # The function browses the board and builds a list of all the free squares; 
-    # the list consists of tuples, while each tuple is a pair of row and column numbers.
+  # The function browses the board and builds a list of all the free squares; 
+  # the list consists of tuples, while each tuple is a pair of row and column numbers.
+  tlist = []
+  for row in range(len(board)):
+    print(board[row])
+    for col in range(len(board[row])):
+      # print(row, col, board[row][col])
+      if type(board[row][col]) == int:
+        # print('FREE', row, col)
+        t = (row, col)
+        tlist.append(t)
 
-
+  # print(tlist)      
+  return tlist
+'''
 def victory_for(board, sign):
     # The function analyzes the board's status in order to check if 
     # the player using 'O's or 'X's has won the game
@@ -117,9 +135,15 @@ def victory_for(board, sign):
 def draw_move(board):
     # The function draws the computer's move and updates the board.
 '''
+make_list_of_free_fields(board)
+enter_move(board)
+#enter_move(board)
+
+'''
 enter_move(board)
 display_board(board)
 enter_move(board)
 display_board(board)
 enter_move(board)
 display_board(board)
+'''
