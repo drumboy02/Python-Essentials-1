@@ -74,28 +74,18 @@ dboard_1 = '+-------+-------+-------+'
 dboard_2 = '|       |       |       |'
 dboard_n = '|   '
 
-print(board)
-
-print(dboard_1)
-print(dboard_2)
-print(dboard_n + str(board[0][0]) + nmark + dboard_n + str(board[0][1]) + nmark + dboard_n + str(board[0][2]) + nmark + dboard_n)
-print(dboard_2)
-print(dboard_1)
-print(dboard_2)
-print(dboard_n + str(board[1][0]) + nmark + dboard_n + str(board[1][1]) + nmark + dboard_n + str(board[1][2]) + nmark + dboard_n)
-print(dboard_2)
-print(dboard_1)
-print(dboard_2)
-print(dboard_n + str(board[2][0]) + nmark + dboard_n + str(board[2][1]) + nmark + dboard_n + str(board[2][2]) + nmark + dboard_n)
-print(dboard_2)
-print(dboard_1)
-
-'''
 def display_board(board):
-    # The function accepts one parameter containing the board's current status
-    # and prints it out to the console.
-
-
+  # The function accepts one parameter containing the board's current status
+  # and prints it out to the console.
+  print(board)
+  for i in range(3):
+    print(dboard_1)
+    print(dboard_2)
+    print(dboard_n + str(board[i][0]) + nmark + dboard_n + str(board[i][1]) + nmark + dboard_n + str(board[i][2]) + nmark + dboard_n)
+    print(dboard_2)
+  print(dboard_1)
+    
+'''
 def enter_move(board):
     # The function accepts the board's current status, asks the user about their move, 
     # checks the input, and updates the board according to the user's decision.
@@ -114,3 +104,4 @@ def victory_for(board, sign):
 def draw_move(board):
     # The function draws the computer's move and updates the board.
 '''
+display_board(board)
