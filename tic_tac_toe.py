@@ -31,7 +31,6 @@ def display_board(board):
 def enter_move(board):
   # The function accepts the board's current status, asks the user about their move, 
   # checks the input, and updates the board according to the user's decision.
-  #print('*****Player move*****')
   pmove = None
   
   try:
@@ -70,10 +69,8 @@ def make_list_of_free_fields(board):
   # the list consists of tuples, while each tuple is a pair of row and column numbers.
   tlist = []
   
-  for row in range(len(board)):
-    
-    for col in range(len(board[row])):
-      
+  for row in range(len(board)):    
+    for col in range(len(board[row])):      
       if type(board[row][col]) == int:
         t = (row, col)
         tlist.append(t)
@@ -84,13 +81,18 @@ def victory_for(board, sign):
     # The function analyzes the board's status in order to check if 
     # the player using 'O's or 'X's has won the game
     v = None
-
+    
     while v == None:
+      winlose = ''
+      if sign == pmark:
+        winlose = 'won!'
+      else:
+        winlose = 'lost!'
+      
       for row in board:
         if row.count(sign) == 3:
-          print('horizontal')
-          print(sign, 'WON!')
-          v = True          
+          print('You ' + winlose)
+          v = True
           return v
         
       if (
@@ -98,15 +100,13 @@ def victory_for(board, sign):
         board[0][1] == sign and board[1][1] == sign and board[2][1] == sign or
         board[0][2] == sign and board[1][2] == sign and board[2][2] == sign
         ):
-        print('vertical')
-        print(sign, 'WON!')
+        print('You ' + winlose)
         v = True
       elif (
         board[0][0] == sign and board[1][1] == sign and board[2][2] == sign or
         board[2][0] == sign and board[1][1] == sign and board[0][2] == sign
         ):
-        print('diagonal')
-        print(sign, 'WON!')
+        print('You ' + winlose)
         v = True
       else:
         v = False
@@ -115,7 +115,6 @@ def victory_for(board, sign):
 
 def draw_move(board):
   # The function draws the computer's move and updates the board.
-  #print('*****Computer move*****')
   cmove = randrange(1, 10)
   flist = make_list_of_free_fields(board)
 
@@ -123,13 +122,11 @@ def draw_move(board):
     board[1][1] = cmark
     return display_board(board)
   elif len(flist) == 1:
-    print('FINAL MOVE')
     c1 = flist[0][0]
     c2 = flist[0][1]
     board[c1][c2] = cmark
     return display_board(board)
 
-  # print('Computer chooses:', cmove)
   for i in range(len(flist)):
     c1 = flist[i][0]
     c2 = flist[i][1]
@@ -146,16 +143,15 @@ win_or_nowin = False
 
 while win_or_nowin == False:
   rounds += 1
-  print('ROUND#', rounds)
   draw_move(board)
+  
   if rounds >= 3:
     win_or_nowin = victory_for(board, cmark)
-    print('computer', win_or_nowin)
   if rounds == 5:
-    print('no winner')
+    if win_or_nowin == False:
+      print('Tie game')
     win_or_nowin = True
   elif win_or_nowin == False:
     enter_move(board)
     if rounds >= 3:
       win_or_nowin = victory_for(board, pmark)
-      print('player', win_or_nowin)
