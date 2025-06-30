@@ -142,17 +142,20 @@ def draw_move(board):
       draw_move(board)
       
 rounds = 0
-winner = False
+win_or_nowin = False
 
-while winner == False:
+while win_or_nowin == False:
   rounds += 1
   print('ROUND#', rounds)
   draw_move(board)
   if rounds >= 3:
-    winner = victory_for(board, cmark)
-    print('computer', winner)
-  if winner == False:
+    win_or_nowin = victory_for(board, cmark)
+    print('computer', win_or_nowin)
+  if rounds == 5:
+    print('no winner')
+    win_or_nowin = True
+  elif win_or_nowin == False:
     enter_move(board)
     if rounds >= 3:
-      winner = victory_for(board, pmark)
-      print('player', winner)
+      win_or_nowin = victory_for(board, pmark)
+      print('player', win_or_nowin)
