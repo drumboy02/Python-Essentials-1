@@ -17,31 +17,33 @@ dboard_n = '|   '
 def display_board(board):
   # The function accepts one parameter containing the board's current status
   # and prints it out to the console.
-  # print(board)
-  for i in range(3):
+  for i in range(len(board)):
     print(dboard_1)
     print(dboard_2)
-    print(dboard_n + str(board[i][0]) + nmark + dboard_n + str(board[i][1]) + nmark + dboard_n + str(board[i][2]) + nmark + dboard_n)
+    print(dboard_n + str(board[i][0]) + nmark +
+          dboard_n + str(board[i][1]) + nmark +
+          dboard_n + str(board[i][2]) + nmark +
+          dboard_n)
     print(dboard_2)
-  print(dboard_1 + '\n')
+  print(dboard_1)
     
 
 def enter_move(board):
   # The function accepts the board's current status, asks the user about their move, 
   # checks the input, and updates the board according to the user's decision.
-  print('*****Player move*****')
+  #print('*****Player move*****')
   pmove = None
   
   try:
-    pmove = int(input('Enter a move: '))
+    pmove = int(input('Enter your move: '))
     
     if pmove < 1 or pmove > 9:
-      print('Enter an number between 1 and 9')
+      print('Enter a number between 1 and 9')
       pmove = None
       enter_move(board)
       
   except ValueError:
-    print('Enter an number between 1 and 9')
+    print('Enter a number between 1 and 9')
     pmove = None
     enter_move(board)
     
@@ -59,8 +61,7 @@ def enter_move(board):
       elif i == len(flist) - 1:
         print('Enter a different number between 1 and 9')
         pmove = None
-        enter_move(board)
-        
+        enter_move(board)        
   else:
     return
 
@@ -79,15 +80,42 @@ def make_list_of_free_fields(board):
       
   return tlist
 
-'''
 def victory_for(board, sign):
     # The function analyzes the board's status in order to check if 
     # the player using 'O's or 'X's has won the game
-'''
+    v = None
+
+    while v == None:
+      for row in board:
+        if row.count(sign) == 3:
+          print('horizontal')
+          print(sign, 'WON!')
+          v = True          
+          return v
+        
+      if (
+        board[0][0] == sign and board[1][0] == sign and board[2][0] == sign or
+        board[0][1] == sign and board[1][1] == sign and board[2][1] == sign or
+        board[0][2] == sign and board[1][2] == sign and board[2][2] == sign
+        ):
+        print('vertical')
+        print(sign, 'WON!')
+        v = True
+      elif (
+        board[0][0] == sign and board[1][1] == sign and board[2][2] == sign or
+        board[2][0] == sign and board[1][1] == sign and board[0][2] == sign
+        ):
+        print('diagonal')
+        print(sign, 'WON!')
+        v = True
+      else:
+        v = False
+
+    return v
 
 def draw_move(board):
   # The function draws the computer's move and updates the board.
-  print('*****Computer move*****')
+  #print('*****Computer move*****')
   cmove = randrange(1, 10)
   flist = make_list_of_free_fields(board)
 
@@ -111,17 +139,33 @@ def draw_move(board):
       return
     
     elif i == len(flist) - 1:
-      print('draw_move()')
       draw_move(board)
 
-for i in range(5):
-  display_board(board)
-  if i == 4:
-    print('LAST ROUND')
-    draw_move(board)
-    display_board(board)
-    break
-  draw_move(board)
-  display_board(board)
-  print('ROUND:', i + 1)
-  enter_move(board)
+print('ROUND 1')
+draw_move(board)
+display_board(board)
+enter_move(board)
+display_board(board)
+print('ROUND 2')
+draw_move(board)
+display_board(board)
+enter_move(board)
+display_board(board)
+print('ROUND 3')
+draw_move(board)
+victory_for(board, cmark)
+display_board(board)
+enter_move(board)
+victory_for(board, pmark)
+display_board(board)
+print('ROUND 4')
+draw_move(board)
+victory_for(board, cmark)
+display_board(board)
+enter_move(board)
+victory_for(board, pmark)
+display_board(board)
+print('LAST ROUND')
+draw_move(board)
+victory_for(board, cmark)
+display_board(board)
