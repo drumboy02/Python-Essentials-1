@@ -56,7 +56,7 @@ def enter_move(board):
       
       if board[c1][c2] == pmove:
         board[c1][c2] = pmark
-        return
+        return display_board(board)
       
       elif i == len(flist) - 1:
         print('Enter a different number between 1 and 9')
@@ -121,51 +121,38 @@ def draw_move(board):
 
   if (1, 1) in flist:
     board[1][1] = cmark
-    return
+    return display_board(board)
   elif len(flist) == 1:
     print('FINAL MOVE')
     c1 = flist[0][0]
     c2 = flist[0][1]
     board[c1][c2] = cmark
-    return
+    return display_board(board)
 
-  print('Computer chooses:', cmove)
+  # print('Computer chooses:', cmove)
   for i in range(len(flist)):
     c1 = flist[i][0]
     c2 = flist[i][1]
     
     if board[c1][c2] == cmove:
       board[c1][c2] = cmark
-      return
+      return display_board(board)
     
     elif i == len(flist) - 1:
       draw_move(board)
+      
+rounds = 0
+winner = False
 
-print('ROUND 1')
-draw_move(board)
-display_board(board)
-enter_move(board)
-display_board(board)
-print('ROUND 2')
-draw_move(board)
-display_board(board)
-enter_move(board)
-display_board(board)
-print('ROUND 3')
-draw_move(board)
-victory_for(board, cmark)
-display_board(board)
-enter_move(board)
-victory_for(board, pmark)
-display_board(board)
-print('ROUND 4')
-draw_move(board)
-victory_for(board, cmark)
-display_board(board)
-enter_move(board)
-victory_for(board, pmark)
-display_board(board)
-print('LAST ROUND')
-draw_move(board)
-victory_for(board, cmark)
-display_board(board)
+while winner == False:
+  rounds += 1
+  print('ROUND#', rounds)
+  draw_move(board)
+  if rounds >= 3:
+    winner = victory_for(board, cmark)
+    print('computer', winner)
+  if winner == False:
+    enter_move(board)
+    if rounds >= 3:
+      winner = victory_for(board, pmark)
+      print('player', winner)
