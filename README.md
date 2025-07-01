@@ -1,6 +1,6 @@
 # Python Essentials 1
 
-##Cisco NetAcad Python Essentials Tic-Tac-Toe project
+## Cisco NetAcad Python Essentials Tic-Tac-Toe project
 
 This repository is for the Python Essentials 1 final project.
 
